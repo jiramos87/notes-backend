@@ -7,7 +7,7 @@ const Note = require('./models/note')
 app.use(express.json())
 app.use(cors())
 app.use(express.static('build'))
-app.use(requestLogger)
+
 
 app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
