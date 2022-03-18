@@ -45,11 +45,14 @@ app.get('/api/notes', (request, response, next) => {
   
 //     response.status(204).end()
 // })
-app.delete('/api/notes/:id', (request, response, next) => {
+app.delete('/api/notes/:id', async (request, response, next) => {
   Note.findByIdAndRemove(request.params.id)
     .then(result => {
       if (result) {
-        response.json(result)
+        await Note.find({}).then(notes => {
+          response.json(notes)
+        })
+        .catch(error => next(error)) 
       } else {
         response.status(204).end()
       }
